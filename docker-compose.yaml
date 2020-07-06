@@ -1,0 +1,39 @@
+version: '2.4'
+services:
+  nats-test:
+    build: ./nats-test/
+    command: npm test
+    # ports:
+    #   - 4000:4000
+    volumes:
+      - ./nats-test:/app
+
+  common:
+    build: ./common/
+    command: npm start
+    volumes:
+      - ./common:/app
+
+  auth:
+    build: ./auth/
+    command: npm test
+    # ports:
+    #   - 4000:4000
+    volumes:
+      - ./auth:/app
+
+  tickets:
+    build: ./tickets/
+    command: npm test
+    # ports:
+    #   - 4000:4000
+    volumes:
+      - ./tickets:/app
+
+  client:
+    build: ./client/
+    command: node index.js
+    ports:
+      - 3000:3000
+    volumes:
+      - ./client:/app
